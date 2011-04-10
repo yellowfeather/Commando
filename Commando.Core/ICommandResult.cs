@@ -1,4 +1,7 @@
 ﻿namespace Commando.Core
 {
-  public interface ICommandResult { }
+  public interface ICommandResult
+  {
+    bool Success { get; set; }    
+  }
 }
