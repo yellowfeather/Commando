@@ -1,17 +1,22 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
 
 namespace Commando.Core
 {
   public class Bus : IBus
   {
-    public void Send(ICommand command)
+    private readonly IServiceLocator _serviceLocator;
+
+    public Bus(IServiceLocator serviceLocator)
     {
-      throw new NotImplementedException();
+      _serviceLocator = serviceLocator;
     }
 
-    public void Publish(IEvent @event)
+    public void Send<TMessage>(TMessage message) where TMessage : IMessage
     {
-      throw new NotImplementedException();
+      var handlers = _serviceLocator.GetAllInstances<IMessageHandler<TMessage>>();
+      foreach (var handler in handlers) {
+        handler.Handle(message);
+      }
     }
   }
 }

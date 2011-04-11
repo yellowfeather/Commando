@@ -2,7 +2,6 @@ namespace Commando.Core
 {
   public interface IBus
   {
-    void Send(ICommand command);
-    void Publish(IEvent @event);
+    void Send<TMessage>(TMessage message) where TMessage : IMessage;
   }
 }

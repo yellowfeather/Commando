@@ -1,12 +1,8 @@
 ﻿namespace Commando.Core
 {
-  public interface ICommand : IMessage
+  public interface ICommand<out TResult> : IMessage where TResult : ICommandResult
   {
-    
-  }
-
-  public interface ICommandT<TResult> : ICommand where TResult : ICommandResult
-  {
+    void Execute();
     TResult Result { get; }
   }
 }

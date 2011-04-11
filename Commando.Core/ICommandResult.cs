@@ -2,6 +2,6 @@
 {
   public interface ICommandResult
   {
-    bool Success { get; set; }    
+    bool Success { get; }    
   }
 }
